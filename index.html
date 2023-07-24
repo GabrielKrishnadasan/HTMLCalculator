@@ -5,16 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTMLCalculator</title>
-    <script src="calculator.js" defer></script>
 </head>
 <body>
-
     <div class="container">
-        <div class="calculator">
+        <div class="calculator" id="screen">
             <form>
                 <div class="display">
-                    <input type="text" name = "display">
+                    <input type="text" name="display" id="display">
                 </div>
+                <script>
+                    const element = document.getElementById("display"); 
+
+                    addEventListener("keydown", function(e) {
+                        if(e.keyCode === 13) {
+                            e.preventDefault();
+                            const str = element.value.toString();
+                            element.value = '';
+                            element.value = eval(str);
+                        }
+                    });
+                </script>
                 <div>
                     <input type="button" value = "AC" onclick="display.value = '' ">
                     <input type="button" value = "DEL" onclick="display.value = display.value.toString().slice(0, -1) ">
@@ -47,14 +57,5 @@
             </form>
         </div>
     </div>
-    <script>
-        document.addEventListener('keydown', function(event) {
-            // Check if the Enter key was pressed
-            if (event.keyCode === 13 || event.key === "Enter") {
-
-                display.value = eval(display.value);
-            }
-        });
-    </script>
 </body>
 </html>
